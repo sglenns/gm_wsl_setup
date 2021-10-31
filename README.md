@@ -3,38 +3,22 @@
 This was created to document the setting up of a WSL from the initial setup.
 The following are assumed already done and set up:
 
--   Installed and configured WSL2
--   Using an Ubuntu distribution
+- Installed and configured WSL2
+- Using an Ubuntu distribution
 
 ## WSL DNS management
 
 ```sh
-sudo nano /etc/wsl.conf
-```
-
-copy the following and save the file
-
-```sh
-[network]
-generateResolvConf=false
-```
-
-Then run this
-
-```sh
 sudo rm /etc/resolv.conf
-sudo nano /etc/resolv.conf
-```
-
-copy the following and save the file
-
-```sh
-nameserver 8.8.8.8
+sudo bash -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
+sudo bash -c 'echo "[network]" > /etc/wsl.conf'
+sudo bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
+sudo chattr +i /etc/resolv.conf
 ```
 
 And shutdown wsl
 
-```cmd
+```ps
 wsl --shutdown
 ```
 
@@ -86,8 +70,12 @@ git config --global pull.ff only
 ## setting `/var/www/` forlder and user permissions
 
 ```sh
+sudo apt install acl
 sudo chown -R www-data:www-data /var/www
 sudo chmod -R 775 /var/www
+sudo chmod g+s /var/www
+sudo setfacl -d -m g::rwx /var/www
+sudo setfacl -d -m o::rx /var/www
 sudo usermod -g www-data $USER
 ```
 
@@ -110,7 +98,8 @@ copy the following and save the file
 </Directory>
 <VirtualHost *:80>
   UseCanonicalName Off
-  ServerAlias *.local #wildcard catch all
+  ServerAlias *.local
+  ServerAlias *
   VirtualDocumentRoot /var/www/%0/public
 </VirtualHost>
 ```
@@ -170,10 +159,11 @@ chmod u+x $HOME/doinit
 
 ## MySQL
 
-Install repository from https://dev.mysql.com/downloads/repo/apt/
+Install .deb file from https://dev.mysql.com/downloads/repo/apt/
 
 ```sh
 sudo dpkg -i mysql-apt-config_**
+sudo apt update
 sudo apt install mysql-server
 sudo service mysql stop
 sudo usermod -d /var/lib/mysql/ mysql
