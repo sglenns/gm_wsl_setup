@@ -104,6 +104,8 @@ copy the following and save the file
 </VirtualHost>
 ```
 
+change `"/var/www/*/public"` and `/var/www/%0/public` according to necessities
+
 ```sh
 sudo a2ensite wildcard.local
 sudo service apache2 restart
@@ -139,24 +141,6 @@ Restart zsh
 exec zsh
 ```
 
-## Starting script
-
-```sh
-nano $HOME/doinit
-```
-
-copy the following and save the file
-
-```sh
-git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull && sudo apt update && sudo apt upgrade -y --allow-downgrades && sudo apt autoremove && sudo apt autoclean && sudo npm -g update && composer selfupdate && composer global update && sudo service apache2 restart
-```
-
-give file execution permissions for current user
-
-```sh
-chmod u+x $HOME/doinit
-```
-
 ## MySQL
 
 Install .deb file from https://dev.mysql.com/downloads/repo/apt/
@@ -169,4 +153,28 @@ sudo service mysql stop
 sudo usermod -d /var/lib/mysql/ mysql
 sudo service mysql start
 sudo mysql_secure_installation
+```
+
+## Starting script
+
+```sh
+nano $HOME/doinit
+```
+
+copy the following and save the file
+
+```sh
+git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull && sudo apt update && sudo apt upgrade -y --allow-downgrades && sudo apt autoremove && sudo apt autoclean&& sudo composer selfupdate && composer global update && sudo service apache2 restart && sudo service php8.0-fpm start  && sudo service php8.0-fpm restart && sudo service mysql restart && npm -g update
+```
+
+give file execution permissions for current user
+
+```sh
+chmod u+x $HOME/doinit
+```
+
+to use it
+
+```sh
+sh $HOME/doinit
 ```
