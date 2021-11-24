@@ -164,6 +164,8 @@ nano $HOME/doinit
 copy the following and save the file
 
 ```sh
+#!/bin/bash
+
 git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull && sudo apt update && sudo apt upgrade -y --allow-downgrades && sudo apt autoremove && sudo apt autoclean&& sudo composer selfupdate && composer global update && sudo service apache2 restart && sudo service php8.0-fpm start  && sudo service php8.0-fpm restart && sudo service mysql restart && npm -g update
 ```
 
@@ -176,5 +178,5 @@ chmod u+x $HOME/doinit
 to use it
 
 ```sh
-sh $HOME/doinit
+$HOME/doinit
 ```
