@@ -180,3 +180,10 @@ to use it
 ```sh
 $HOME/doinit
 ```
+
+## Cypress
+to use Cypress it might be needed to do as follows
+```sh
+sudo apt update
+sudo apt install -y libgbm-dev
+```
