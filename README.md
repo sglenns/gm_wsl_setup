@@ -22,6 +22,48 @@ And shutdown wsl
 wsl --shutdown
 ```
 
+## disable IPv6 addressing
+
+### on system
+
+Edit `/etc/sysctl.conf`
+```sh
+sudo nano /etc/sysctl.conf
+```
+
+paste at bottom
+
+```sh
+#disable ipv6
+net.ipv6.conf.all.disable_ipv6=1
+net.ipv6.conf.default.disable_ipv6=1
+net.ipv6.conf.lo.disable_ipv6=1
+```
+make changes effetctive
+
+```sh
+sudo sysctl -p
+```
+
+### on SSH
+
+edit `/etc/ssh/sshd_config`
+
+```sh
+sudo nano /etc/ssh/sshd_config
+```
+
+and modify
+
+```sh
+AddressFamily inet
+```
+
+restart ssh
+```sh
+/scripts/restartsrv_sshd
+```
+
 ## setting up repositories and add git, php and node
 
 ```sh
