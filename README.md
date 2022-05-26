@@ -203,12 +203,25 @@ sudo mysql_secure_installation
 nano $HOME/doinit
 ```
 
-copy the following and save the file
+copy the follow#!/bin/bash
+
+git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull
+sudo sysctl -p
+sudo apt update
+sudo apt upgrade -y --allow-downgrades
+sudo apt autoremove -y
+sudo apt autoclean -y
+sudo composer selfupdate
+composer global update
+npm -g update
+
+sudo service apache2 restart
+sudo service php8.0-fpm start
+sudo service php8.0-fpm restart
+sudo service mysql restarting and save the file
 
 ```sh
-#!/bin/bash
 
-git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull && sudo apt update && sudo apt upgrade -y --allow-downgrades && sudo apt autoremove && sudo apt autoclean&& sudo composer selfupdate && composer global update && sudo service apache2 restart && sudo service php8.0-fpm start  && sudo service php8.0-fpm restart && sudo service mysql restart && npm -g update
 ```
 
 give file execution permissions for current user
