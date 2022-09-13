@@ -198,14 +198,14 @@ sudo mysql_secure_installation
 ```
 
 ## Starting script
-
 ```sh
 nano $HOME/doinit
 ```
 
-copy the follow#!/bin/bash
-
+copy the following
 ```sh
+#!/bin/bash
+
 git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull
 sudo sysctl -p
 sudo apt update
