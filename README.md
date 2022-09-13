@@ -205,6 +205,7 @@ nano $HOME/doinit
 
 copy the follow#!/bin/bash
 
+```sh
 git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull
 sudo sysctl -p
 sudo apt update
@@ -219,9 +220,6 @@ sudo service apache2 restart
 sudo service php8.0-fpm start
 sudo service php8.0-fpm restart
 sudo service mysql restarting and save the file
-
-```sh
-
 ```
 
 give file execution permissions for current user
